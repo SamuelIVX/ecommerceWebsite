@@ -7,8 +7,8 @@ import { useState } from "react";
 import CartModel from "./CartModel";
 
 const NavIcons = () => {
-  const [isProfileOpen, seIsProfileOpen] = useState(false);
-  const [isCartOpen, seIsCartOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const router = useRouter();
   //Temporary
@@ -18,7 +18,7 @@ const NavIcons = () => {
     if (!isLoggedIn) {
       router.push("/login");
     }
-    seIsProfileOpen((prev) => !prev);
+    setIsProfileOpen((prev) => !prev);
   };
 
   return (
@@ -44,14 +44,11 @@ const NavIcons = () => {
         height={22}
         className="cursor-pointer"
       />
-      <div className="relative cursor-pointer">
-        <Image
-          src="/cart.png"
-          alt=""
-          width={22}
-          height={22}
-          onClick={() => seIsCartOpen((prev) => !prev)}
-        />
+      <div
+        className="relative cursor-pointer"
+        onClick={() => setIsCartOpen((prev) => !prev)}
+      >
+        <Image src="/cart.png" alt="" width={22} height={22} />
         <div className="absolute -top-4 -right-4 w-6 h-6 bg-lama rounded-full text-white text-sm flex items-center justify-center">
           2
         </div>
