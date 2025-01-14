@@ -25,7 +25,7 @@ const ProductList = async ({
   //   .limit(limit || PRODUCT_PER_PAGE)
   //   .find();
 
-  const productQuery = wixClient.products
+  let productQuery = wixClient.products
     .queryProducts()
     .startsWith("name", params?.name || "")
     .eq("collectionIds", categoryId)
@@ -47,10 +47,10 @@ const ProductList = async ({
     ];
 
     if (sortType === "asc") {
-      productQuery.ascending(sortBy);
+      productQuery = productQuery.ascending(sortBy);
     }
     if (sortType === "desc") {
-      productQuery.descending(sortBy);
+      productQuery = productQuery.descending(sortBy);
     }
   }
 
