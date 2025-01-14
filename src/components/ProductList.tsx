@@ -3,8 +3,9 @@ import { products } from "@wix/stores";
 import Image from "next/image";
 import Link from "next/link";
 import DOMPurify from "isomorphic-dompurify";
+import Pagination from "./Pagination";
 
-const PRODUCT_PER_PAGE = 20;
+const PRODUCT_PER_PAGE = 8;
 
 const ProductList = async ({
   categoryId,
@@ -34,7 +35,10 @@ const ProductList = async ({
     )
     .gt("priceData.price", params?.min || 0)
     .lt("priceData.price", params?.max || 999999)
-    .limit(limit || PRODUCT_PER_PAGE);
+    .limit(limit || PRODUCT_PER_PAGE)
+    .skip(
+      params?.page ? parseInt(params.page) * (limit || PRODUCT_PER_PAGE) : 0
+    );
 
   if (params?.sort) {
     const [sortType, sortBy] = params.sort.split(" ") || [
@@ -99,6 +103,11 @@ const ProductList = async ({
           </button>
         </Link>
       ))}
+      <Pagination
+        currentPage={res.currentPage || 0}
+        hasPrev={res.hasPrev()}
+        hasNext={res.hasNext()}
+      />
     </div>
   );
 };
