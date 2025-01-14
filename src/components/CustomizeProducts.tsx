@@ -1,6 +1,7 @@
 "use client";
 import { products } from "@wix/stores";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Add from "./Add";
 
 const CustomizeProducts = ({
   productId,
@@ -14,6 +15,18 @@ const CustomizeProducts = ({
   const [selectedOptions, setSelectedOptions] = useState<{
     [key: string]: string;
   }>({});
+
+  const [selectedVariant, setSelectedVariant] = useState<products.Variant>();
+  useEffect(() => {
+    const variant = variants.find((v) => {
+      const variantChoices = v.choices;
+      if (!variantChoices) return false;
+      return Object.entries(selectedOptions).every(
+        ([key, value]) => variantChoices[key] === value
+      );
+    });
+    setSelectedVariant(variant);
+  }, [selectedOptions, variants]);
 
   const handleOptionSelect = (optionType: string, choice: string) => {
     setSelectedOptions((prev) => ({ ...prev, [optionType]: choice }));
@@ -95,6 +108,13 @@ const CustomizeProducts = ({
           </ul>
         </div>
       ))}
+      <Add
+        productId={productId}
+        variantId={
+          selectedVariant?._id || "00000000-0000-0000-0000-000000000000"
+        }
+        stockNumber={selectedVariant?.stock?.quantity || 0}
+      />
       {/* COLOR */}
       {/* 
           <ul className="flex items-center gap-3">
