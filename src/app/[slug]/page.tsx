@@ -5,11 +5,12 @@ import { wixClientServer } from "@/lib/wixClientServer";
 import { notFound } from "next/navigation";
 
 const SinglePage = async ({ params }: { params: { slug: string } }) => {
-  const wixClient = await wixClientServer();
+  const { slug } = await params; // this ensures params are awaited before usage
 
+  const wixClient = await wixClientServer();
   const products = await wixClient.products
     .queryProducts()
-    .eq("slug", params.slug)
+    .eq("slug", slug)
     .find();
 
   if (!products.items[0]) {
@@ -42,7 +43,13 @@ const SinglePage = async ({ params }: { params: { slug: string } }) => {
           </div>
         )}
         <div className="h-[2px] bg-gray-100" />
-        <CustomizeProducts />
+        {product.variants && product.productOptions && (
+          <CustomizeProducts
+            productId={product._id!}
+            variants={product.variants}
+            productOptions={product.productOptions}
+          />
+        )}
         <Add />
         <div className="h-[2px] bg-gray-100" />
         {product.additionalInfoSections?.map((section: any) => (
