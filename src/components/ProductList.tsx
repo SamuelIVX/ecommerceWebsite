@@ -16,14 +16,41 @@ const ProductList = async ({
   searchParams?: any;
 }) => {
   const wixClient = await wixClientServer();
+  const params = await searchParams;
 
-  const res = await wixClient.products
+  // const res = await wixClient.products
+  //   .queryProducts()
+  //   .eq("collectionIds", categoryId)
+  //   .limit(limit || PRODUCT_PER_PAGE)
+  //   .find();
+
+  const productQuery = wixClient.products
     .queryProducts()
+    .startsWith("name", params?.name || "")
     .eq("collectionIds", categoryId)
-    .limit(limit || PRODUCT_PER_PAGE)
-    .find();
+    .hasSome(
+      "productType",
+      params?.type ? [params.type] : ["physical", "digital"]
+    )
+    .gt("priceData.price", params?.min || 0)
+    .lt("priceData.price", params?.max || 999999)
+    .limit(limit || PRODUCT_PER_PAGE);
 
-  //console.log(res.items[0].price);
+  if (params?.sort) {
+    const [sortType, sortBy] = params.sort.split(" ") || [
+      "asc",
+      "priceData.price",
+    ];
+
+    if (sortType === "asc") {
+      productQuery.ascending(sortBy);
+    }
+    if (sortType === "desc") {
+      productQuery.descending(sortBy);
+    }
+  }
+
+  const res = await productQuery.find();
 
   return (
     <div className="mt-12 flex gap-x-8 gap -y-16 justify-between flex-wrap">
