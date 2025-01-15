@@ -103,7 +103,7 @@ const ProductList = async ({
           </button>
         </Link>
       ))}
-      {searchParams?.cat || searchParams?.name ? (
+      {params?.cat || params?.name ? (
         <Pagination
           currentPage={res.currentPage || 0}
           hasPrev={res.hasPrev()}
