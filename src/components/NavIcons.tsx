@@ -2,11 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import CartModel from "./CartModel";
 import { useWixClient } from "@/hooks/useWixClient";
 import Cookies from "js-cookie";
+import { useCartStore } from "@/hooks/useCartStore";
 
 const NavIcons = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -14,11 +15,11 @@ const NavIcons = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
-  // const pathName = usePathname();
 
   const wixClient = useWixClient();
   const isLoggedIn = wixClient.auth.loggedIn();
-  //Temporary
+
+  //TEMPORARY
   // const isLoggedIn = false;
 
   const handleProfile = () => {
@@ -30,6 +31,7 @@ const NavIcons = () => {
   };
 
   // AUTH WITH WIX MANAGED AUTH
+
   // const wixClient = useWixClient();
   // const login = async () => {
   //   const loginRequestData = wixClient.auth.generateOAuthData(
@@ -42,12 +44,18 @@ const NavIcons = () => {
 
   const handleLogout = async () => {
     setIsLoading(true);
-    Cookies.remove("refreshTokens");
+    Cookies.remove("refreshToken");
     const { logoutUrl } = await wixClient.auth.logout(window.location.href);
     setIsLoading(false);
     setIsProfileOpen(false);
     router.push(logoutUrl);
   };
+
+  const { counter, getCart } = useCartStore();
+
+  useEffect(() => {
+    getCart(wixClient);
+  }, [wixClient, getCart]);
 
   return (
     <div className="flex items-center gap-4 xl:gap-6 relative">
@@ -81,7 +89,7 @@ const NavIcons = () => {
       >
         <Image src="/cart.png" alt="" width={22} height={22} />
         <div className="absolute -top-4 -right-4 w-6 h-6 bg-lama rounded-full text-white text-sm flex items-center justify-center">
-          2
+          {counter}
         </div>
       </div>
       {isCartOpen && <CartModel />}
