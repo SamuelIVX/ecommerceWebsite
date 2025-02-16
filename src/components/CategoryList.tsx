@@ -1,5 +1,5 @@
 import { wixClientServer } from "@/lib/wixClientServer";
-import { media } from "@wix/sdk";
+// import { media } from "@wix/sdk";
 import Image from "next/image";
 import Link from "next/link";
 

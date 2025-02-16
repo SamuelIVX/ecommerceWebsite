@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Add from "@/components/Add";
 import CustomizeProducts from "@/components/CustomizeProducts";
 import ProductImages from "@/components/ProductImages";
 import { wixClientServer } from "@/lib/wixClientServer";
 import { notFound } from "next/navigation";
 
-const SinglePage = async ({ params }: { params: { slug: string } }) => {
-  const { slug } = await params; // this ensures params are awaited before usage
+const SinglePage = async ({ params }: { params: any }) => {
+  // { slug: string }
+  const { slug } = await params; 
 
   const wixClient = await wixClientServer();
   const products = await wixClient.products
