@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# <b>Full-Stack Ecommerce Web Application</b>
 
-## Getting Started
+A <b>production-ready</b> ecommerce platform that handles real-world shopping complexities while being the <b>perfect starter kit</b> for developers.
 
-First, run the development server:
+## Why This Matters
+Most traders lose money because they:
 
-```bash
+✅ 90% of core ecommerce features out-of-the-box
+
+✅ Optimized performance at every layer
+
+✅ Actionable insights at a glance
+
+## This tool solves those problems by:
+
+🔍 <b>User auth (OAuth + token refresh)</b> 
+
+💡 <b>Cart/checkout flows</b> 
+
+🔑  <b>Search/pagination</b> 
+
+📌 <b>Payment-ready architecture</b>
+
+## 🚀 How to Run This Project Locally
+## Prerequisites
+Next.js (v18+)
+Wix Developer Account
+
+## Setup & Installation
+### 1. Clone the repository
+git clone [https://github.com/SamuelIVX/ecommerceWebsite]
+
+cd ecommercewebstie
+
+## 2. Install dependencies
+npm install
+
+## 3. Configure Wix
+NEXT_PUBLIC_WIX_CLIENT_ID=your_clientid
+FEATURED_PRODUCTS_CATEGORY_ID=your_featured_products_id
+NEXT_PUBLIC_WIX_APP_ID =your_public_wix_app_id
+
+## 4. Start the Development Server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ⚙️ Technology Stack
+Core Framework - [Next.js](https://nextjs.org/) | <b>Hybrid rendering (SSR/SSG), optimized performance, SEO-ready</b>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Ecommerce Engine - [Wix JavaScript SDK](https://dev.wix.com/docs)| <b>Production-grade cart/checkout without backend headaches</b>
 
-## Learn More
+State Management - [Zustand](https://github.com/pmndrs/zustand) | <b>Global cart state without Redux complexity</b>
 
-To learn more about Next.js, take a look at the following resources:
+Auth - OAuth + [Cookie Tokens](https://nextjs.org/docs/app/building-your-application/routing/middleware) | <b>Secure sessions with auto-refresh</b>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Styling - [TailwindCSS](https://tailwindcss.com/) + React Hooks | <b>Lightning-fast styling + reusable behaviors</b>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Search - Client-side filters + Server-side pagination | <b>Instant results without full-page reloads</b>
