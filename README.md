@@ -3,7 +3,6 @@
 A <b>production-ready</b> ecommerce platform that handles real-world shopping complexities while being the <b>perfect starter kit</b> for developers.
 
 ## Why This Matters
-Most traders lose money because they:
 
 ✅ 90% of core ecommerce features out-of-the-box
 
@@ -24,6 +23,7 @@ Most traders lose money because they:
 ## 🚀 How to Run This Project Locally
 ## Prerequisites
 Next.js (v18+)
+
 Wix Developer Account
 
 ## Setup & Installation
@@ -37,7 +37,9 @@ npm install
 
 ## 3. Configure Wix
 NEXT_PUBLIC_WIX_CLIENT_ID=your_clientid
+
 FEATURED_PRODUCTS_CATEGORY_ID=your_featured_products_id
+
 NEXT_PUBLIC_WIX_APP_ID =your_public_wix_app_id
 
 ## 4. Start the Development Server
