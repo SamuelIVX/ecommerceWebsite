@@ -1,61 +1,86 @@
-# <b>Full-Stack Ecommerce Web Application</b>
+# Ecommerce Website
 
-A <b>production-ready</b> ecommerce platform that handles real-world shopping complexities while being the <b>perfect starter kit</b> for developers.
+**Full-Stack Ecommerce Platform**
 
-## Why This Matters
+> "Production-ready shopping experience."
 
-✅ 90% of core ecommerce features out-of-the-box
+A modern ecommerce web application built with Next.js and Wix, featuring user authentication, cart management, product search, and a complete checkout flow.
 
-✅ Optimized performance at every layer
+## Features
 
-✅ Actionable insights at a glance
+- 🔐 **User Authentication** - OAuth integration with secure token refresh
+- 🛒 **Shopping Cart** - Full cart management with persistent state
+- 🔍 **Product Search** - Real-time search with filtering and pagination
+- 💳 **Checkout Flow** - Complete checkout process ready for payment integration
+- 📱 **Responsive Design** - Mobile-first design with Tailwind CSS
+- ⚡ **Optimized Performance** - Server-side rendering and static generation
 
-## This tool solves those problems by:
+## Tech Stack
 
-🔍 <b>User auth (OAuth + token refresh)</b> 
+### Frontend
+- **Next.js 15** - React framework with App Router
+- **React 19** - UI library
+- **TypeScript** - Type-safe development
+- **Tailwind CSS** - Styling
 
-💡 <b>Cart/checkout flows</b> 
+### Ecommerce & State Management
+- **Wix SDK** - Ecommerce backend and product management
+- **Zustand** - Global state management for cart
 
-🔑  <b>Search/pagination</b> 
+### Authentication
+- **OAuth** - User authentication
+- **Cookie-based Sessions** - Secure session management with auto-refresh
 
-📌 <b>Payment-ready architecture</b>
-
-## 🚀 How to Run This Project Locally
 ## Prerequisites
-Next.js (v18+)
 
-Wix Developer Account
+- Node.js v18 or higher
+- npm or yarn
+- Wix Developer Account
 
-## Setup & Installation
-### 1. Clone the repository
-git clone [https://github.com/SamuelIVX/ecommerceWebsite]
+## Getting Started
 
-cd ecommercewebstie
+### 1. Clone the Repository
 
-## 2. Install dependencies
+```bash
+git clone https://github.com/SamuelIVX/ecommerceWebsite.git
+cd ecommerceWebsite
+```
+
+### 2. Install Dependencies
+
+```bash
 npm install
+```
 
-## 3. Configure Wix
-NEXT_PUBLIC_WIX_CLIENT_ID=your_clientid
+### 3. Configure Environment Variables
 
-FEATURED_PRODUCTS_CATEGORY_ID=your_featured_products_id
+Create a `.env` file in the root directory:
 
-NEXT_PUBLIC_WIX_APP_ID =your_public_wix_app_id
+```env
+NEXT_PUBLIC_WIX_CLIENT_ID=your_client_id_here
+FEATURED_PRODUCTS_CATEGORY_ID=your_featured_products_id_here
+NEXT_PUBLIC_WIX_APP_ID=your_public_wix_app_id_here
+```
 
-## 4. Start the Development Server
+### 4. Run the Development Server
+
+```bash
 npm run dev
+```
 
-Open http://localhost:3000 in your browser.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## ⚙️ Technology Stack
-Core Framework - [Next.js](https://nextjs.org/) | <b>Hybrid rendering (SSR/SSG), optimized performance, SEO-ready</b>
+## Project Structure
 
-Ecommerce Engine - [Wix JavaScript SDK](https://dev.wix.com/docs)| <b>Production-grade cart/checkout without backend headaches</b>
-
-State Management - [Zustand](https://github.com/pmndrs/zustand) | <b>Global cart state without Redux complexity</b>
-
-Auth - OAuth + [Cookie Tokens](https://nextjs.org/docs/app/building-your-application/routing/middleware) | <b>Secure sessions with auto-refresh</b>
-
-Styling - [TailwindCSS](https://tailwindcss.com/) + React Hooks | <b>Lightning-fast styling + reusable behaviors</b>
-
-Search - Client-side filters + Server-side pagination | <b>Instant results without full-page reloads</b>
+```
+src/
+├── app/              # Next.js pages and routes
+├── components/       # React components
+│   ├── CartModel.tsx
+│   ├── CategoryList.tsx
+│   ├── ProductList.tsx
+│   └── ...
+├── context/          # React context providers
+├── hooks/            # Custom React hooks
+└── lib/              # Utility functions and clients
+```
