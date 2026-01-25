@@ -1,0 +1,95 @@
+{
+    "extends": [
+        "config:recommended",
+        ":semanticCommits"
+    ],
+    "timezone": "America/New_York",
+    "schedule": [
+        "every weekday"
+    ],
+    "osvVulnerabilityAlerts": true,
+    "prHourlyLimit": 6,
+    "rangeStrategy": "auto",
+    "labels": [
+        "dependencies"
+    ],
+    "dependencyDashboard": true,
+    "enabledManagers": [
+        "npm",
+        "github-actions",
+        "dockerfile"
+    ],
+    "packageRules": [
+        {
+            "matchManagers": [
+                "github-actions"
+            ],
+            "groupName": "github-actions",
+            "automerge": true,
+            "automergeType": "branch"
+        },
+        {
+            "matchManagers": [
+                "npm"
+            ],
+            "matchDepTypes": [
+                "devDependencies"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch"
+            ],
+            "automerge": true,
+            "automergeType": "branch"
+        },
+        {
+            "matchManagers": [
+                "npm"
+            ],
+            "matchDepTypes": [
+                "dependencies"
+            ],
+            "matchUpdateTypes": [
+                "patch"
+            ],
+            "automerge": true,
+            "automergeType": "branch"
+        },
+        {
+            "matchManagers": [
+                "npm"
+            ],
+            "groupName": "types",
+            "matchPackageNames": [
+                "/^@types\\//"
+            ]
+        },
+        {
+            "matchManagers": [
+                "npm"
+            ],
+            "groupName": "linting",
+            "matchPackageNames": [
+                "/^eslint/",
+                "/^@eslint\\//",
+                "/^prettier/"
+            ]
+        },
+        {
+            "matchManagers": [
+                "npm"
+            ],
+            "matchDatasources": [
+                "npm"
+            ],
+            "separateMajorMinor": true
+        },
+        {}
+    ],
+    "lockFileMaintenance": {
+        "enabled": true,
+        "schedule": [
+            "at any time"
+        ]
+    }
+}
