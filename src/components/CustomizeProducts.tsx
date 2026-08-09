@@ -1,6 +1,6 @@
 "use client";
 import { products } from "@wix/stores";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import Add from "./Add";
 
 const CustomizeProducts = ({
@@ -16,16 +16,14 @@ const CustomizeProducts = ({
     [key: string]: string;
   }>({});
 
-  const [selectedVariant, setSelectedVariant] = useState<products.Variant>();
-  useEffect(() => {
-    const variant = variants.find((v) => {
+  const selectedVariant = useMemo(() => {
+    return variants.find((v) => {
       const variantChoices = v.choices;
       if (!variantChoices) return false;
       return Object.entries(selectedOptions).every(
         ([key, value]) => variantChoices[key] === value
       );
     });
-    setSelectedVariant(variant);
   }, [selectedOptions, variants]);
 
   const handleOptionSelect = (optionType: string, choice: string) => {

@@ -5,6 +5,8 @@ import { wixClientServer } from "@/lib/wixClientServer";
 import Image from "next/image";
 import { Suspense } from "react";
 
+export const dynamic = "force-dynamic";
+
 const ListPage = async ({ searchParams }: { searchParams: any }) => {
   const params = await searchParams;
   const wixClient = await wixClientServer();
