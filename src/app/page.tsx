@@ -8,6 +8,8 @@ import Slider from "@/components/Slider";
 import { Suspense } from "react";
 //import { useEffect } from "react";
 
+export const dynamic = "force-dynamic";
+
 const HomePage = async () => {
   // const wixClient = useWixClient();
 
