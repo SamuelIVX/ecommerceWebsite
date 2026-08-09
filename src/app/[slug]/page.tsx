@@ -5,6 +5,8 @@ import ProductImages from "@/components/ProductImages";
 import { wixClientServer } from "@/lib/wixClientServer";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 const SinglePage = async ({ params }: { params: any }) => {
   // { slug: string }
   const { slug } = await params; 
