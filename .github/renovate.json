@@ -52,6 +52,7 @@
                 "dependencies"
             ],
             "matchUpdateTypes": [
+                "minor",
                 "patch"
             ],
             "automerge": true,
