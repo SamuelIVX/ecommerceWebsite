@@ -113,4 +113,28 @@ describe("useCartStore", () => {
         expect(useCartStore.getState().counter).toBe(1);
         expect(useCartStore.getState().isLoading).toBe(false);
     });
+
+    it("addItem resets loading when the SDK call rejects", async () => {
+        const client = makeClient();
+        client.currentCart.addToCurrentCart.mockRejectedValue(new Error("boom"));
+
+        await useCartStore.getState().addItem(client, "prod-1", "var-1", 1);
+
+        const state = useCartStore.getState();
+        expect(state.isLoading).toBe(false);
+        expect(state.counter).toBe(0);
+    });
+
+    it("removeItem resets loading when the SDK call rejects", async () => {
+        const client = makeClient();
+        client.currentCart.removeLineItemsFromCurrentCart.mockRejectedValue(
+            new Error("boom")
+        );
+
+        await useCartStore.getState().removeItem(client, "a");
+
+        const state = useCartStore.getState();
+        expect(state.isLoading).toBe(false);
+        expect(state.counter).toBe(0);
+    });
 });

@@ -74,13 +74,13 @@ const CartModel = () => {
                   {/* BOTTOM */}
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-500">{item.quantity}</span>
-                    <span
+                    <button
                       className="text-blue-500"
                       style={{ cursor: isLoading ? "not-allowed" : "pointer" }}
                       onClick={() => removeItem(wixClient, item._id!)}
                     >
                       Remove
-                    </span>
+                    </button>
                   </div>
                 </div>
               </div>

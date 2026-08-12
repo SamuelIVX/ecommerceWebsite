@@ -76,6 +76,8 @@ describe("CartModel", () => {
 
     it("calls removeItem with the client and item id", () => {
         const removeItem = vi.fn();
+        const wixClient = { currentCart: {} };
+        vi.mocked(useWixClient).mockReturnValue(wixClient as never);
         useCartStore.setState({
             cart: { lineItems: [item] },
             counter: 1,
@@ -84,7 +86,27 @@ describe("CartModel", () => {
         useCartStore.setState({ ...useCartStore.getState(), removeItem });
 
         render(<CartModel />);
-        fireEvent.click(screen.getByText("Remove"));
+        fireEvent.click(screen.getByRole("button", { name: "Remove" }));
+
+        expect(removeItem).toHaveBeenCalledTimes(1);
+        expect(removeItem.mock.calls[0][0]).toBe(wixClient);
+        expect(removeItem.mock.calls[0][1]).toBe("item-1");
+    });
+
+    it("removes the item when activated with the keyboard", () => {
+        const removeItem = vi.fn();
+        useCartStore.setState({
+            cart: { lineItems: [item] },
+            counter: 1,
+            isLoading: false,
+        });
+        useCartStore.setState({ ...useCartStore.getState(), removeItem });
+
+        render(<CartModel />);
+        fireEvent.keyDown(screen.getByRole("button", { name: "Remove" }), {
+            key: "Enter",
+        });
+        fireEvent.click(screen.getByRole("button", { name: "Remove" }));
 
         expect(removeItem).toHaveBeenCalledTimes(1);
         expect(removeItem.mock.calls[0][1]).toBe("item-1");

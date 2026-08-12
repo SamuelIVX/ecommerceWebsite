@@ -84,6 +84,11 @@ describe("a11y", () => {
         });
         vi.mocked(useWixClient).mockReturnValue({
             auth: { loggedIn: () => false },
+            currentCart: {
+                getCurrentCart: vi.fn().mockResolvedValue({
+                    lineItems: [item],
+                }),
+            },
         } as never);
         const { container } = render(<NavIcons />);
         expect(await seriousViolations(container)).toEqual([]);
