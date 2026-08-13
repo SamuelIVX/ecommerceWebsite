@@ -50,12 +50,17 @@ describe("CartModel", () => {
         });
         render(<CartModel />);
         expect(screen.getByText("Cart is Empty")).toBeInTheDocument();
+        expect(
+            screen.queryByRole("heading", { name: "Shopping Cart" })
+        ).not.toBeInTheDocument();
     });
 
-    it("renders the cart section for an empty lineItems array", () => {
+    it("shows an empty state for an empty lineItems array", () => {
         render(<CartModel />);
-        expect(screen.getByRole("heading", { name: "Shopping Cart" })).toBeInTheDocument();
-        expect(screen.getByText("$0")).toBeInTheDocument();
+        expect(screen.getByText("Cart is Empty")).toBeInTheDocument();
+        expect(
+            screen.queryByRole("heading", { name: "Shopping Cart" })
+        ).not.toBeInTheDocument();
     });
 
     it("renders line items with name, price, quantity and subtotal", () => {
