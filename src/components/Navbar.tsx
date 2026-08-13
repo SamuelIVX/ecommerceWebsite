@@ -1,16 +1,21 @@
 "use client";
 
+/**
+ * Site header — mobile hamburger menu vs desktop nav + SearchBar + NavIcons.
+ * NavIcons is dynamically imported with `ssr: false` because it reads cookies
+ * / Wix client state.
+ */
 import Link from "next/link";
 import Menu from "./Menu";
 import Image from "next/image";
 import SearchBar from "./SearchBar";
 import dynamic from "next/dynamic";
-// import NavIcons from "./NavIcons";
+
 const NavIcons = dynamic(() => import("./NavIcons"), { ssr: false });
 
+/** Responsive Horizon navbar shared by every page via RootLayout. */
 const Navbar = () => {
   return (
-    //Screen heights from smallest (phones) -> largest (laptops)
     <div className="h-20 px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 relative">
       {/* MOBILE */}
       <div className="h-full flex items-center justify-between md:hidden">

@@ -1,3 +1,6 @@
+/**
+ * Unit tests for `useCartStore` get/add/remove against a mocked Wix client.
+ */
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { useCartStore } from "./useCartStore";
 import type { WixClient } from "@/context/wixContext";

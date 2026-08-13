@@ -1,9 +1,14 @@
 "use client";
 
+/**
+ * Mobile full-screen nav overlay toggled from the hamburger icon.
+ * Link targets are currently empty placeholders.
+ */
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
+/** Compact mobile menu for the navbar. */
 const Menu = () => {
   const [open, setOpen] = useState(false);
   return (

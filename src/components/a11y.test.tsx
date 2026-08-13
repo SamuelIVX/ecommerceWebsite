@@ -1,3 +1,6 @@
+/**
+ * Accessibility smoke tests (axe) for CartModel and NavIcons.
+ */
 import { describe, it, expect, vi } from "vitest";
 import { render } from "@testing-library/react";
 import axe from "axe-core";

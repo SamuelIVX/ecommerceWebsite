@@ -1,3 +1,8 @@
+/**
+ * Category / search listing page — campaign banner, filter controls, and a
+ * ProductList for the collection resolved from `?cat=` (defaults to
+ * all-products). Forced dynamic to avoid live Wix prerender in CI.
+ */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Filter from "@/components/Filter";
 import ProductList from "@/components/ProductList";
@@ -7,6 +12,10 @@ import { Suspense } from "react";
 
 export const dynamic = "force-dynamic";
 
+/**
+ * @param searchParams - Promise/object of list query params (`cat`, filters, etc.).
+ * @returns The category listing page.
+ */
 const ListPage = async ({ searchParams }: { searchParams: any }) => {
   const params = await searchParams;
   const wixClient = await wixClientServer();

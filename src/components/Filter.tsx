@@ -1,7 +1,13 @@
 "use client";
 
+/**
+ * List-page filter controls — writes type/min/max/sort (and the broken `cat`
+ * select) into the URL search params via `router.replace`. Note: both `cat`
+ * options currently use `value=""`, so that control is non-functional.
+ */
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
+/** Client filter bar for `/list`. */
 const Filter = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();

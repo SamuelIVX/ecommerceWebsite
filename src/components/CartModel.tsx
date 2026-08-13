@@ -1,24 +1,26 @@
 "use client";
 
+/**
+ * Dropdown cart panel — empty state, line items with remove, and a locally
+ * computed subtotal (Wix `price.amount` is a string). Mounted from NavIcons.
+ */
 import Image from "next/image";
 import { useCartStore } from "@/hooks/useCartStore";
 import { media as wixMedia } from "@wix/sdk";
 import { useWixClient } from "@/hooks/useWixClient";
 
+/**
+ * Renders the cart popover using `useCartStore` state.
+ * @returns Empty-cart message or the line-item list with checkout CTAs.
+ */
 const CartModel = () => {
-  //TEMPORARY
-  // const cartItems = true;
-
   const wixClient = useWixClient();
   const { cart, isLoading, removeItem } = useCartStore();
-  
-  // const calculateSubtotal = () => {
-  //   return cart.lineItems.reduce((acc, item) => acc + (item.price?.amount || 0) * (item.quantity || 1), 0);
-  // };
+
   const calculateSubtotal = () => {
     return cart.lineItems.reduce((acc, item) => {
-      const amount = Number(item.price?.amount) || 0; // Ensure amount is a number
-      const quantity = Number(item.quantity) || 1; // Ensure quantity is a number
+      const amount = Number(item.price?.amount) || 0;
+      const quantity = Number(item.quantity) || 1;
       return acc + amount * quantity;
     }, 0);
   };
@@ -90,7 +92,6 @@ const CartModel = () => {
           <div className="">
             <div className="flex items-center justify-between font-semibold">
               <span className="">Subtotal</span>
-              {/* <span className="">${cart.subtotal.amount}</span> */}
               <span className="">${calculateSubtotal()}</span>
             </div>
             <p className="text-gray-500 text-sm mt-2 mb-4">

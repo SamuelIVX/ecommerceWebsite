@@ -1,8 +1,15 @@
 "use client";
+
+/**
+ * Product media gallery — large selected image plus clickable thumbnails.
+ */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from "next/image";
 import { useState } from "react";
 
+/**
+ * @param items - Wix media items (`image.url`, `_id`) for the product.
+ */
 const ProductImages = ({ items }: { items: any }) => {
   const [index, setIndex] = useState(0);
 

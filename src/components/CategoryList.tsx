@@ -1,8 +1,14 @@
+/**
+ * Horizontal scroll of Wix collections linking to `/list?cat=<slug>`.
+ */
 import { wixClientServer } from "@/lib/wixClientServer";
-// import { media } from "@wix/sdk";
 import Image from "next/image";
 import Link from "next/link";
 
+/**
+ * Fetches all collections and renders category cards.
+ * @returns Category carousel for the home page.
+ */
 const CategoryList = async () => {
   const wixClient = await wixClientServer();
   const cats = await wixClient.collections.queryCollections().find();

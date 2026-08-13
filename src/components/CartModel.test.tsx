@@ -1,3 +1,6 @@
+/**
+ * CartModel behavior tests — empty state, line items, remove handler.
+ */
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import CartModel from "./CartModel";

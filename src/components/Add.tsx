@@ -1,8 +1,19 @@
 "use client";
+
+/**
+ * Quantity stepper + add-to-cart button for a concrete product/variant.
+ * Caps quantity at `stockNumber` and disables the CTA while the cart store
+ * is mutating.
+ */
 import { useCartStore } from "@/hooks/useCartStore";
 import { useWixClient } from "@/hooks/useWixClient";
 import { useState } from "react";
 
+/**
+ * @param productId - Wix catalog product id.
+ * @param variantId - Selected variant id (zero UUID when product has no variants).
+ * @param stockNumber - Available inventory used to clamp quantity.
+ */
 const Add = ({
   productId,
   variantId,
@@ -13,9 +24,6 @@ const Add = ({
   stockNumber: number;
 }) => {
   const [quantity, setQuantity] = useState(1);
-
-  //TEMPORARY
-  // const stock = 4;
 
   const handleQuantity = (type: "i" | "d") => {
     if (type == "d" && quantity > 1) {
