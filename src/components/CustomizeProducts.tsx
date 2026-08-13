@@ -1,8 +1,9 @@
 "use client";
 
 /**
- * Variant option picker — selects Wix product options, resolves the matching
- * in-stock variant, and hands off to `Add` with the chosen variant id.
+ * Variant option picker — selects Wix product options, matches a variant by
+ * selected choices, and hands off to `Add` with the chosen variant id.
+ * Choice buttons are stock-gated; the matched variant is not re-checked for stock.
  */
 import { products } from "@wix/stores";
 import { useMemo, useState } from "react";
