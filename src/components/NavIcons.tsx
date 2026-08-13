@@ -16,6 +16,11 @@ import { useCartStore } from "@/hooks/useCartStore";
 
 /**
  * Profile menu + cart badge; redirects unauthenticated profile clicks to /login.
+ * SECURITY: logout clears the `refreshToken` cookie before Wix logout redirect.
+ * @returns Navbar icon cluster (profile, notifications, cart).
+ * @example
+ * // Used inside Navbar desktop/mobile chrome
+ * <NavIcons />
  */
 const NavIcons = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);

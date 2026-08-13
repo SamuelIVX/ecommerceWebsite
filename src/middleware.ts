@@ -10,8 +10,13 @@ import { NextRequest, NextResponse } from "next/server";
 
 /**
  * Mint visitor tokens when the plural cookie is missing, then continue the request.
+ * SECURITY: may set a cookie containing a Wix refresh token — do not log it.
  * @param request - Incoming Next.js request (cookies inspected for `refreshTokens`).
  * @returns NextResponse, optionally with a newly set `refreshTokens` cookie.
+ * @throws If `generateVisitorTokens` rejects (no try/catch around the Wix call).
+ * @example
+ * // First anonymous hit without `refreshTokens` → response sets that cookie
+ * // Subsequent hits with the cookie → NextResponse.next() unchanged
  */
 export const middleware = async (request: NextRequest) => {
   const cookies = request.cookies;

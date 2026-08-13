@@ -12,6 +12,9 @@ import { useWixClient } from "@/hooks/useWixClient";
 /**
  * Renders the cart popover using `useCartStore` state.
  * @returns Empty-cart message or the line-item list with checkout CTAs.
+ * @example
+ * // Mounted from NavIcons when the cart icon is toggled open
+ * {isCartOpen && <CartModel />}
  */
 const CartModel = () => {
   const wixClient = useWixClient();

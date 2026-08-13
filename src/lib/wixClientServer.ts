@@ -10,7 +10,11 @@ import { cookies } from "next/headers";
 /**
  * Builds a Wix client authenticated with the visitor refresh token from cookies.
  * Falls back to an empty token object when the cookie is missing or unparsable.
+ * SECURITY: returned client carries the refresh token — do not log tokens.
  * @returns A Wix client with `products` and `collections` modules.
+ * @example
+ * const wixClient = await wixClientServer();
+ * const products = await wixClient.products.queryProducts().find();
  */
 export const wixClientServer = async () => {
   let refreshToken;

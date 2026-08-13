@@ -38,6 +38,11 @@ export const WixClientContext = createContext<WixClient>(wixClient);
  * Provides the browser Wix client to the App Router tree (navbar, cart, login).
  * @param children - App content wrapped by the provider in `RootLayout`.
  * @returns Context provider element.
+ * @example
+ * <WixClientContextProvider>
+ *   <Navbar />
+ *   {children}
+ * </WixClientContextProvider>
  */
 export const WixClientContextProvider = ({
   children,

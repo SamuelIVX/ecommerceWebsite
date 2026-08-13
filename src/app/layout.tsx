@@ -14,8 +14,12 @@ export const metadata: Metadata = {
 };
 
 /**
+ * HTML shell with Wix context, navbar, and footer around every route.
  * @param children - Page content for the active route.
  * @returns The HTML shell with shared chrome.
+ * @example
+ * // App Router applies this layout to every route automatically
+ * <RootLayout>{page}</RootLayout>
  */
 export default function RootLayout({
   children,

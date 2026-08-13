@@ -8,7 +8,11 @@ import Image from "next/image";
 import { useState } from "react";
 
 /**
+ * Large selected image with thumbnail strip for product media.
  * @param items - Wix media items (`image.url`, `_id`) for the product.
+ * @returns Gallery UI for the selected media index.
+ * @example
+ * <ProductImages items={product.media?.items} />
  */
 const ProductImages = ({ items }: { items: any }) => {
   const [index, setIndex] = useState(0);

@@ -6,9 +6,13 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 /**
+ * Prev/next buttons that rewrite the `page` search param on the current path.
  * @param currentPage - Zero-based page index from the Wix query result.
  * @param hasPrev - Whether a previous page exists.
  * @param hasNext - Whether a next page exists.
+ * @returns Previous/Next controls for the product list.
+ * @example
+ * <Pagination currentPage={0} hasPrev={false} hasNext={true} />
  */
 const Pagination = ({
   currentPage,

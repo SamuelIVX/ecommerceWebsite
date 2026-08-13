@@ -13,8 +13,12 @@ import { Suspense } from "react";
 export const dynamic = "force-dynamic";
 
 /**
+ * Category listing: banner, filters, and ProductList for `?cat=` (default all-products).
  * @param searchParams - Promise/object of list query params (`cat`, filters, etc.).
  * @returns The category listing page.
+ * @example
+ * // Route: /list?cat=all-products
+ * <ListPage searchParams={Promise.resolve({ cat: "all-products" })} />
  */
 const ListPage = async ({ searchParams }: { searchParams: any }) => {
   const params = await searchParams;

@@ -9,9 +9,17 @@ import { useMemo, useState } from "react";
 import Add from "./Add";
 
 /**
+ * Option choosers that resolve an in-stock variant and render `Add`.
  * @param productId - Catalog product id passed to add-to-cart.
  * @param variants - Available Wix variants for stock/choice matching.
  * @param productOptions - Option groups (color/size/etc.) rendered as choosers.
+ * @returns Variant pickers plus the add-to-cart block for the matched variant.
+ * @example
+ * <CustomizeProducts
+ *   productId={product._id!}
+ *   variants={product.variants!}
+ *   productOptions={product.productOptions!}
+ * />
  */
 const CustomizeProducts = ({
   productId,

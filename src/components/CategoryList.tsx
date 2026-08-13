@@ -8,6 +8,10 @@ import Link from "next/link";
 /**
  * Fetches all collections and renders category cards.
  * @returns Category carousel for the home page.
+ * @example
+ * <Suspense fallback="loading">
+ *   <CategoryList />
+ * </Suspense>
  */
 const CategoryList = async () => {
   const wixClient = await wixClientServer();

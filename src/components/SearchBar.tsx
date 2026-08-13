@@ -6,7 +6,13 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-/** Desktop navbar search input. */
+/**
+ * Desktop navbar search — pushes `/list?name=<query>` on submit.
+ * @returns The search form control.
+ * @example
+ * // Used in Navbar on md+ breakpoints
+ * <SearchBar />
+ */
 const SearchBar = () => {
   const router = useRouter();
 

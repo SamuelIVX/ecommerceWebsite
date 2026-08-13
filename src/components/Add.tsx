@@ -10,9 +10,13 @@ import { useWixClient } from "@/hooks/useWixClient";
 import { useState } from "react";
 
 /**
+ * Quantity stepper and add-to-cart CTA for one product/variant.
  * @param productId - Wix catalog product id.
  * @param variantId - Selected variant id (zero UUID when product has no variants).
  * @param stockNumber - Available inventory used to clamp quantity.
+ * @returns The quantity + add-to-cart controls.
+ * @example
+ * <Add productId={id} variantId={variantId} stockNumber={5} />
  */
 const Add = ({
   productId,
