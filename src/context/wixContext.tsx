@@ -31,7 +31,10 @@ const wixClient = createClient({
 /** Inferred type of the shared browser Wix client instance. */
 export type WixClient = typeof wixClient;
 
-/** React context holding the singleton browser Wix client. */
+/** React context holding the singleton browser Wix client.
+ * @example
+ * const wixClient = useContext(WixClientContext);
+ */
 export const WixClientContext = createContext<WixClient>(wixClient);
 
 /**

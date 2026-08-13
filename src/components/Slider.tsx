@@ -34,7 +34,12 @@ const slides = [
   },
 ];
 
-/** Home-page hero slider with prev/next dots driven by local `current` index. */
+/**
+ * Home-page hero slider with prev/next dots driven by local `current` index.
+ * @returns Auto-advancing marketing carousel.
+ * @example
+ * <Slider />
+ */
 const Slider = () => {
   const [current, setCurrent] = useState(0);
 

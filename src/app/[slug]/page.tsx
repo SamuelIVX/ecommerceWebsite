@@ -15,8 +15,7 @@ export const dynamic = "force-dynamic";
 /**
  * Resolves a product by slug and renders detail chrome.
  * @param params - Route params promise/object containing `slug`.
- * @returns The product detail page, or triggers `notFound()`.
- * @throws Invokes Next.js `notFound()` when no product matches the slug.
+ * @returns The product detail page, or triggers `notFound()` when no product matches.
  * @example
  * // Route: /[slug] e.g. /summer-tee
  * <SinglePage params={Promise.resolve({ slug: "summer-tee" })} />
