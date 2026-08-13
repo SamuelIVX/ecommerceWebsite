@@ -9,7 +9,9 @@ import { useMemo, useState } from "react";
 import Add from "./Add";
 
 /**
- * Option choosers that resolve an in-stock variant and render `Add`.
+ * Option choosers that match selected choices to a variant and render `Add`.
+ * Choice buttons are stock-gated; the matched variant itself is not re-checked
+ * for stock before `Add` (zero-stock fallback still renders).
  * @param productId - Catalog product id passed to add-to-cart.
  * @param variants - Available Wix variants for stock/choice matching.
  * @param productOptions - Option groups (color/size/etc.) rendered as choosers.

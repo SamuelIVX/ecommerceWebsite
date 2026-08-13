@@ -19,7 +19,7 @@ import { useCartStore } from "@/hooks/useCartStore";
  * SECURITY: logout clears the `refreshToken` cookie before Wix logout redirect.
  * @returns Navbar icon cluster (profile, notifications, cart).
  * @example
- * // Used inside Navbar desktop/mobile chrome
+ * // Used in the desktop Navbar branch (md+); mobile uses Menu instead
  * <NavIcons />
  */
 const NavIcons = () => {

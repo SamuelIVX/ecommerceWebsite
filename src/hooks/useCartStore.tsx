@@ -31,7 +31,7 @@ type CartState = {
  * (errors are logged, not rethrown).
  * @example
  * const { cart, getCart, addItem, removeItem } = useCartStore();
- * getCart(wixClient);
+ * useEffect(() => { getCart(wixClient); }, [wixClient, getCart]);
  * await addItem(wixClient, productId, variantId, 1);
  */
 export const useCartStore = create<CartState>((set) => ({

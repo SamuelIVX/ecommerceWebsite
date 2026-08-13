@@ -17,11 +17,12 @@ const PRODUCT_PER_PAGE = 8;
  * Queries Wix and renders a product card grid (optional filters + pagination).
  * @param categoryId - Wix collection id to filter products.
  * @param limit - Optional page size override (default 8).
- * @param searchParams - Optional list filters (`name`, `type`, `min`, `max`, `sort`, `page`, `cat`).
+ * @param searchParams - Optional list filters (`name`, `type`, `min`, `max`, `sort`, `page`);
+ *   `cat` is only a category-page marker that enables pagination (not a Wix filter).
  * @returns Product card grid, with pagination when filtering by cat/name.
  * @example
  * <ProductList categoryId={collectionId} limit={4} />
- * <ProductList categoryId={cat._id!} searchParams={searchParams} />
+ * <ProductList categoryId={cat.collection?._id!} searchParams={searchParams} />
  */
 const ProductList = async ({
   categoryId,
