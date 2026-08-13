@@ -1,3 +1,8 @@
+/**
+ * Product detail page keyed by URL slug — media gallery, pricing, variant
+ * picker / add-to-cart, and additional-info sections from Wix. Forced dynamic
+ * so CI does not prerender against live catalog.
+ */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Add from "@/components/Add";
 import CustomizeProducts from "@/components/CustomizeProducts";
@@ -7,9 +12,12 @@ import { notFound } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
+/**
+ * @param params - Route params promise/object containing `slug`.
+ * @returns The product detail page, or triggers `notFound()`.
+ */
 const SinglePage = async ({ params }: { params: any }) => {
-  // { slug: string }
-  const { slug } = await params; 
+  const { slug } = await params;
 
   const wixClient = await wixClientServer();
   const products = await wixClient.products

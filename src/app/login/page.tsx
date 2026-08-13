@@ -1,5 +1,11 @@
 "use client";
 
+/**
+ * Member auth page — login, register, password reset, and email verification
+ * against Wix Managed Auth. On success, stores `refreshToken` (singular) via
+ * js-cookie and redirects home. SECURITY: handles passwords and session tokens
+ * — do not log credentials or tokens.
+ */
 import { useWixClient } from "@/hooks/useWixClient";
 import { LoginState } from "@wix/sdk";
 import { useState } from "react";
@@ -13,13 +19,15 @@ enum MODE {
   EMAIL_VERIFICATION = "EMAIL_VERIFICATION",
 }
 
+/**
+ * Multi-mode auth form driven by Wix `LoginState` responses.
+ * @returns The login/register UI, or redirects when already logged in.
+ */
 const LoginPage = () => {
   const wixClient = useWixClient();
   const router = useRouter();
 
   const isLoggedIn = wixClient.auth.loggedIn();
-
-  console.log(isLoggedIn);
 
   if (isLoggedIn) {
     router.push("/");
@@ -34,7 +42,6 @@ const LoginPage = () => {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
-  //const pathname = usePathname();
   const formTitle =
     mode === MODE.LOGIN
       ? "Log in"
@@ -89,14 +96,12 @@ const LoginPage = () => {
         default:
           break;
       }
-      console.log(response);
       switch (response?.loginState) {
         case LoginState.SUCCESS:
           setMessage("Successful! You are being redirected.");
           const tokens = await wixClient.auth.getMemberTokensForDirectLogin(
             response.data.sessionToken!
           );
-          console.log(tokens);
           Cookies.set("refreshToken", JSON.stringify(tokens.refreshToken), {
             expires: 2,
           });
@@ -124,8 +129,7 @@ const LoginPage = () => {
         default:
           break;
       }
-    } catch (err) {
-      console.log(err);
+    } catch {
       setError("Something went wrong");
     } finally {
       setIsLoading(false);

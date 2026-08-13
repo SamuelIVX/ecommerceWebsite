@@ -1,5 +1,10 @@
 "use client";
 
+/**
+ * Navbar profile / notifications / cart icons. Loads the cart on mount, opens
+ * CartModel, and handles logout (clears `refreshToken` cookie). SECURITY:
+ * logout clears the refresh token cookie.
+ */
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -9,6 +14,9 @@ import { useWixClient } from "@/hooks/useWixClient";
 import Cookies from "js-cookie";
 import { useCartStore } from "@/hooks/useCartStore";
 
+/**
+ * Profile menu + cart badge; redirects unauthenticated profile clicks to /login.
+ */
 const NavIcons = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -19,9 +27,6 @@ const NavIcons = () => {
   const wixClient = useWixClient();
   const isLoggedIn = wixClient.auth.loggedIn();
 
-  //TEMPORARY
-  // const isLoggedIn = false;
-
   const handleProfile = () => {
     if (!isLoggedIn) {
       router.push("/login");
@@ -29,18 +34,6 @@ const NavIcons = () => {
       setIsProfileOpen((prev) => !prev);
     }
   };
-
-  // AUTH WITH WIX MANAGED AUTH
-
-  // const wixClient = useWixClient();
-  // const login = async () => {
-  //   const loginRequestData = wixClient.auth.generateOAuthData(
-  //     "http://localhost:3000"
-  //   );
-  //   localStorage.setItem("oAuthRedirectData", JSON.stringify(loginRequestData));
-  //   const { authUrl } = await wixClient.auth.getAuthUrl(loginRequestData);
-  //   window.location.href = authUrl;
-  // };
 
   const handleLogout = async () => {
     setIsLoading(true);

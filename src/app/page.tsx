@@ -1,31 +1,20 @@
-//"use client";
+/**
+ * Storefront home page — hero slider, featured products, category strip, and
+ * a second product row. Forced dynamic so CI builds do not prerender against
+ * live Wix (FEATURED_PRODUCTS_CATEGORY_ID must be set in env).
+ */
 import CategoryList from "@/components/CategoryList";
 import ProductList from "@/components/ProductList";
 import Slider from "@/components/Slider";
-//import { WixClientContext } from "@/context/wixContext";
-//import { useWixClient } from "@/hooks/useWixClient";
-//import { wixClientServer } from "@/lib/wixClientServer";
 import { Suspense } from "react";
-//import { useEffect } from "react";
 
 export const dynamic = "force-dynamic";
 
+/**
+ * Renders the marketing home layout with Suspense around Wix-backed lists.
+ * @returns The home page React tree.
+ */
 const HomePage = async () => {
-  // const wixClient = useWixClient();
-
-  // useEffect(() => {
-  //   const getProducts = async () => {
-  //     const res = await wixClient.products.queryProducts().find();
-  //     console.log(res);
-  //   };
-  //   getProducts();
-  // }, [wixClient]);
-
-  // const wixClient = await wixClientServer();
-  // const res = await wixClient.products.queryProducts().find();
-
-  // console.log(res);
-
   return (
     <div className="">
       <Slider />

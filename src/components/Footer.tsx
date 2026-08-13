@@ -1,6 +1,10 @@
+/**
+ * Site footer with brand blurb, placeholder contact info, and link columns.
+ */
 import Image from "next/image";
 import Link from "next/link";
 
+/** Shared footer rendered by RootLayout. */
 const Footer = () => {
   return (
     <div className="py-24 px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 bg-gray-100 text-sm mt-24">

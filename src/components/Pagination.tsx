@@ -1,7 +1,15 @@
 "use client";
 
+/**
+ * Prev/next controls that update the `page` query param on the current path.
+ */
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
+/**
+ * @param currentPage - Zero-based page index from the Wix query result.
+ * @param hasPrev - Whether a previous page exists.
+ * @param hasNext - Whether a next page exists.
+ */
 const Pagination = ({
   currentPage,
   hasPrev,

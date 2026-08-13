@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Auto-advancing marketing hero carousel (hardcoded slides, 3s interval).
+ */
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -31,6 +34,7 @@ const slides = [
   },
 ];
 
+/** Home-page hero slider with prev/next dots driven by local `current` index. */
 const Slider = () => {
   const [current, setCurrent] = useState(0);
 

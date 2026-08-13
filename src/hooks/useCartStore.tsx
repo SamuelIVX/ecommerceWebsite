@@ -1,3 +1,8 @@
+/**
+ * Zustand store for the Wix current-cart: fetch, add, and remove line items.
+ * Callers must pass the browser `WixClient` from context; state is global so
+ * NavIcons badge and CartModel stay in sync.
+ */
 import { create } from "zustand";
 import { currentCart } from "@wix/ecom";
 import { WixClient } from "@/context/wixContext";
@@ -20,6 +25,10 @@ type CartState = {
   removeItem: (wixClient: WixClient, itemId: string) => void;
 };
 
+/**
+ * Global cart store. `counter` mirrors `cart.lineItems.length` after successful
+ * mutations. Failed Wix calls clear `isLoading` without wiping the last cart.
+ */
 export const useCartStore = create<CartState>((set) => ({
   cart: emptyCart,
   isLoading: true,
@@ -33,7 +42,7 @@ export const useCartStore = create<CartState>((set) => ({
         counter: cart?.lineItems.length || 0,
       });
     } catch (err) {
-      console.error("Failed to fetch cart:", err); 
+      console.error("Failed to fetch cart:", err);
       set((prev) => ({ ...prev, isLoading: false }));
     }
   },

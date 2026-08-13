@@ -1,3 +1,6 @@
+/**
+ * Vitest config — jsdom, Testing Library setup, `@` → `src` alias, UTC TZ.
+ */
 import { defineConfig } from "vitest/config";
 import path from "path";
 

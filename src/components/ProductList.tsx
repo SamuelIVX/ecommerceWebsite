@@ -1,3 +1,8 @@
+/**
+ * Server component that queries Wix products with optional name/type/price/sort
+ * filters and pagination. Sanitizes the `shortDesc` additional-info HTML via
+ * DOMPurify before `dangerouslySetInnerHTML`.
+ */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { wixClientServer } from "@/lib/wixClientServer";
 import { products } from "@wix/stores";
@@ -8,6 +13,12 @@ import Pagination from "./Pagination";
 
 const PRODUCT_PER_PAGE = 8;
 
+/**
+ * @param categoryId - Wix collection id to filter products.
+ * @param limit - Optional page size override (default 8).
+ * @param searchParams - Optional list filters (`name`, `type`, `min`, `max`, `sort`, `page`, `cat`).
+ * @returns Product card grid, with pagination when filtering by cat/name.
+ */
 const ProductList = async ({
   categoryId,
   limit,
@@ -19,12 +30,6 @@ const ProductList = async ({
 }) => {
   const wixClient = await wixClientServer();
   const params = await searchParams;
-
-  // const res = await wixClient.products
-  //   .queryProducts()
-  //   .eq("collectionIds", categoryId)
-  //   .limit(limit || PRODUCT_PER_PAGE)
-  //   .find();
 
   let productQuery = wixClient.products
     .queryProducts()
