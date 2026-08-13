@@ -8,7 +8,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-/** Compact mobile menu for the navbar. */
+/**
+ * Compact mobile menu for the navbar.
+ * @returns Hamburger toggle and full-screen overlay links.
+ * @example
+ * <Menu />
+ */
 const Menu = () => {
   const [open, setOpen] = useState(false);
   return (

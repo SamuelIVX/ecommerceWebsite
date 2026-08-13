@@ -13,6 +13,9 @@ export const dynamic = "force-dynamic";
 /**
  * Renders the marketing home layout with Suspense around Wix-backed lists.
  * @returns The home page React tree.
+ * @example
+ * // Route `/` — featured ProductList uses FEATURED_PRODUCTS_CATEGORY_ID
+ * <HomePage />
  */
 const HomePage = async () => {
   return (

@@ -13,7 +13,13 @@ import dynamic from "next/dynamic";
 
 const NavIcons = dynamic(() => import("./NavIcons"), { ssr: false });
 
-/** Responsive Horizon navbar shared by every page via RootLayout. */
+/**
+ * Responsive Horizon navbar shared by every page via RootLayout.
+ * @returns Header chrome (mobile menu / desktop nav + SearchBar + NavIcons).
+ * @example
+ * // Mounted from RootLayout
+ * <Navbar />
+ */
 const Navbar = () => {
   return (
     <div className="h-20 px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 relative">

@@ -13,8 +13,12 @@ import { notFound } from "next/navigation";
 export const dynamic = "force-dynamic";
 
 /**
+ * Resolves a product by slug and renders detail chrome.
  * @param params - Route params promise/object containing `slug`.
- * @returns The product detail page, or triggers `notFound()`.
+ * @returns The product detail page, or triggers `notFound()` when no product matches.
+ * @example
+ * // Route: /[slug] e.g. /summer-tee
+ * <SinglePage params={Promise.resolve({ slug: "summer-tee" })} />
  */
 const SinglePage = async ({ params }: { params: any }) => {
   const { slug } = await params;

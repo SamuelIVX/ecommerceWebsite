@@ -21,7 +21,12 @@ enum MODE {
 
 /**
  * Multi-mode auth form driven by Wix `LoginState` responses.
+ * SECURITY: submits passwords and stores refresh tokens — never log either.
+ * Auth failures are shown via on-page `error` state (not rethrown).
  * @returns The login/register UI, or redirects when already logged in.
+ * @example
+ * // Route: /login — switch MODE via links between login/register/reset
+ * <LoginPage />
  */
 const LoginPage = () => {
   const wixClient = useWixClient();

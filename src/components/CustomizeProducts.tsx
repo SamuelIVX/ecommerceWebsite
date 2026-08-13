@@ -1,17 +1,28 @@
 "use client";
 
 /**
- * Variant option picker — selects Wix product options, resolves the matching
- * in-stock variant, and hands off to `Add` with the chosen variant id.
+ * Variant option picker — selects Wix product options, matches a variant by
+ * selected choices, and hands off to `Add` with the chosen variant id.
+ * Choice buttons are stock-gated; the matched variant is not re-checked for stock.
  */
 import { products } from "@wix/stores";
 import { useMemo, useState } from "react";
 import Add from "./Add";
 
 /**
+ * Option choosers that match selected choices to a variant and render `Add`.
+ * Choice buttons are stock-gated; the matched variant itself is not re-checked
+ * for stock before `Add` (zero-stock fallback still renders).
  * @param productId - Catalog product id passed to add-to-cart.
  * @param variants - Available Wix variants for stock/choice matching.
  * @param productOptions - Option groups (color/size/etc.) rendered as choosers.
+ * @returns Variant pickers plus the add-to-cart block for the matched variant.
+ * @example
+ * <CustomizeProducts
+ *   productId={product._id!}
+ *   variants={product.variants!}
+ *   productOptions={product.productOptions!}
+ * />
  */
 const CustomizeProducts = ({
   productId,

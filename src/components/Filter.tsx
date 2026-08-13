@@ -7,7 +7,14 @@
  */
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
-/** Client filter bar for `/list`. */
+/**
+ * Client filter bar for `/list` — updates type/min/max/sort query params.
+ * Note: both `cat` options use `value=""`, so that control is non-functional.
+ * @returns The filter form controls.
+ * @example
+ * // Mounted on /list above ProductList
+ * <Filter />
+ */
 const Filter = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();

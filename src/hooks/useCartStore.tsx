@@ -27,7 +27,13 @@ type CartState = {
 
 /**
  * Global cart store. `counter` mirrors `cart.lineItems.length` after successful
- * mutations. Failed Wix calls clear `isLoading` without wiping the last cart.
+ * mutations. Failed Wix calls clear `isLoading` without wiping the last cart
+ * (errors are logged, not rethrown).
+ * @returns Zustand store hook with `cart`, `isLoading`, `counter`, and mutators.
+ * @example
+ * const { cart, getCart, addItem, removeItem } = useCartStore();
+ * useEffect(() => { getCart(wixClient); }, [wixClient, getCart]);
+ * await addItem(wixClient, productId, variantId, 1);
  */
 export const useCartStore = create<CartState>((set) => ({
   cart: emptyCart,
