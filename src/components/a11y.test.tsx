@@ -47,11 +47,11 @@ vi.mock("@wix/sdk", () => ({
 const item = {
     _id: "item-1",
     productName: { original: "Test Product" },
-    price: { amount: 19.99 },
+    price: { amount: "19.99" },
     quantity: 2,
-    availability: { status: "In Stock" },
+    availability: { status: "AVAILABLE" },
     image: "wix:image://test/123",
-};
+} as const;
 
 async function seriousViolations(container: HTMLElement) {
     const results = await axe.run(container, {

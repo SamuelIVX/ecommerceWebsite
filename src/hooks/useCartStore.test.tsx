@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { useCartStore } from "./useCartStore";
+import type { WixClient } from "@/context/wixContext";
 
 const makeClient = (overrides = {}) => ({
     currentCart: {
@@ -8,7 +9,7 @@ const makeClient = (overrides = {}) => ({
         removeLineItemsFromCurrentCart: vi.fn(),
         ...overrides,
     },
-});
+}) as unknown as WixClient;
 
 describe("useCartStore", () => {
     beforeEach(() => {
@@ -21,7 +22,7 @@ describe("useCartStore", () => {
 
     it("getCart populates cart and counter from the client", async () => {
         const client = makeClient();
-        client.currentCart.getCurrentCart.mockResolvedValue({
+        vi.mocked(client.currentCart.getCurrentCart).mockResolvedValue({
             lineItems: [{ _id: "a" }, { _id: "b" }, { _id: "c" }],
         });
 
@@ -35,7 +36,7 @@ describe("useCartStore", () => {
 
     it("getCart falls back to empty cart when the client returns nothing", async () => {
         const client = makeClient();
-        client.currentCart.getCurrentCart.mockResolvedValue(undefined);
+        vi.mocked(client.currentCart.getCurrentCart).mockResolvedValue(undefined);
 
         await useCartStore.getState().getCart(client);
 
@@ -45,7 +46,7 @@ describe("useCartStore", () => {
 
     it("getCart stops loading without crashing when the fetch throws", async () => {
         const client = makeClient();
-        client.currentCart.getCurrentCart.mockRejectedValue(new Error("boom"));
+        vi.mocked(client.currentCart.getCurrentCart).mockRejectedValue(new Error("boom"));
 
         await useCartStore.getState().getCart(client);
 
@@ -56,7 +57,7 @@ describe("useCartStore", () => {
 
     it("addItem sends the line item and updates cart + counter", async () => {
         const client = makeClient();
-        client.currentCart.addToCurrentCart.mockResolvedValue({
+        vi.mocked(client.currentCart.addToCurrentCart).mockResolvedValue({
             cart: { lineItems: [{ _id: "a" }] },
         });
 
@@ -80,7 +81,7 @@ describe("useCartStore", () => {
 
     it("addItem omits variant options when variantId is empty", async () => {
         const client = makeClient();
-        client.currentCart.addToCurrentCart.mockResolvedValue({
+        vi.mocked(client.currentCart.addToCurrentCart).mockResolvedValue({
             cart: { lineItems: [] },
         });
 
@@ -101,7 +102,7 @@ describe("useCartStore", () => {
 
     it("removeItem removes the line item and updates counter", async () => {
         const client = makeClient();
-        client.currentCart.removeLineItemsFromCurrentCart.mockResolvedValue({
+        vi.mocked(client.currentCart.removeLineItemsFromCurrentCart).mockResolvedValue({
             cart: { lineItems: [{ _id: "b" }] },
         });
 
@@ -116,7 +117,7 @@ describe("useCartStore", () => {
 
     it("addItem resets loading when the SDK call rejects", async () => {
         const client = makeClient();
-        client.currentCart.addToCurrentCart.mockRejectedValue(new Error("boom"));
+        vi.mocked(client.currentCart.addToCurrentCart).mockRejectedValue(new Error("boom"));
 
         await useCartStore.getState().addItem(client, "prod-1", "var-1", 1);
 
@@ -127,7 +128,7 @@ describe("useCartStore", () => {
 
     it("removeItem resets loading when the SDK call rejects", async () => {
         const client = makeClient();
-        client.currentCart.removeLineItemsFromCurrentCart.mockRejectedValue(
+        vi.mocked(client.currentCart.removeLineItemsFromCurrentCart).mockRejectedValue(
             new Error("boom")
         );
 

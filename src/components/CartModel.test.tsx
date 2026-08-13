@@ -24,11 +24,11 @@ vi.mock("@wix/sdk", () => ({
 const item = {
     _id: "item-1",
     productName: { original: "Test Product" },
-    price: { amount: 19.99 },
+    price: { amount: "19.99" },
     quantity: 2,
-    availability: { status: "In Stock" },
+    availability: { status: "AVAILABLE" },
     image: "wix:image://test/123",
-};
+} as const;
 
 describe("CartModel", () => {
     beforeEach(() => {
@@ -69,7 +69,7 @@ describe("CartModel", () => {
         expect(screen.getByRole("heading", { name: "Shopping Cart" })).toBeInTheDocument();
         expect(screen.getByText("Test Product")).toBeInTheDocument();
         expect(screen.getByText("2 x")).toBeInTheDocument();
-        expect(screen.getByText("In Stock")).toBeInTheDocument();
+        expect(screen.getByText("AVAILABLE")).toBeInTheDocument();
         expect(screen.getByText("$39.98")).toBeInTheDocument();
         expect(screen.getByRole("button", { name: "Checkout" })).toBeInTheDocument();
     });
