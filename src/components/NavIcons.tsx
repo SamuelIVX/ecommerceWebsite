@@ -13,6 +13,7 @@ import CartModel from "./CartModel";
 import { useWixClient } from "@/hooks/useWixClient";
 import Cookies from "js-cookie";
 import { useCartStore } from "@/hooks/useCartStore";
+import { REFRESH_TOKEN_COOKIE } from "@/lib/authCookies";
 
 /**
  * Profile menu + cart badge; redirects unauthenticated profile clicks to /login.
@@ -42,7 +43,7 @@ const NavIcons = () => {
 
   const handleLogout = async () => {
     setIsLoading(true);
-    Cookies.remove("refreshToken");
+    Cookies.remove(REFRESH_TOKEN_COOKIE);
     const { logoutUrl } = await wixClient.auth.logout(window.location.href);
     setIsLoading(false);
     setIsProfileOpen(false);

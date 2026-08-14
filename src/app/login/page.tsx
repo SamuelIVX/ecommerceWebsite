@@ -2,15 +2,16 @@
 
 /**
  * Member auth page — login, register, password reset, and email verification
- * against Wix Managed Auth. On success, stores `refreshToken` (singular) via
- * js-cookie and redirects home. SECURITY: handles passwords and session tokens
- * — do not log credentials or tokens.
+ * against Wix Managed Auth. On success, stores `refreshToken` via js-cookie
+ * (shared cookie name, `src/lib/authCookies.ts`) and redirects home. SECURITY:
+ * handles passwords and session tokens — do not log credentials or tokens.
  */
 import { useWixClient } from "@/hooks/useWixClient";
 import { LoginState } from "@wix/sdk";
 import { useState } from "react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { REFRESH_TOKEN_COOKIE } from "@/lib/authCookies";
 
 enum MODE {
   LOGIN = "LOGIN",
@@ -107,7 +108,7 @@ const LoginPage = () => {
           const tokens = await wixClient.auth.getMemberTokensForDirectLogin(
             response.data.sessionToken!
           );
-          Cookies.set("refreshToken", JSON.stringify(tokens.refreshToken), {
+          Cookies.set(REFRESH_TOKEN_COOKIE, JSON.stringify(tokens.refreshToken), {
             expires: 2,
           });
           wixClient.auth.setTokens(tokens);

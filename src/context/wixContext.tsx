@@ -10,8 +10,9 @@ import { products, collections } from "@wix/stores";
 import { currentCart } from "@wix/ecom";
 import Cookies from "js-cookie";
 import { createContext, ReactNode } from "react";
+import { REFRESH_TOKEN_COOKIE } from "@/lib/authCookies";
 
-const refreshToken = JSON.parse(Cookies.get("refreshToken") || "{}");
+const refreshToken = JSON.parse(Cookies.get(REFRESH_TOKEN_COOKIE) || "{}");
 
 const wixClient = createClient({
   modules: {
