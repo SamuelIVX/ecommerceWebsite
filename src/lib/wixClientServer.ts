@@ -1,11 +1,13 @@
 /**
  * Server-side Wix SDK client factory for App Router Server Components.
- * Reads the singular `refreshToken` cookie (see middleware cookie-name mismatch).
- * SECURITY: refresh token comes from cookies — never log tokens.
+ * Reads the `refreshToken` cookie (shared name with middleware, see
+ * `src/lib/authCookies.ts`). SECURITY: refresh token comes from cookies —
+ * never log tokens.
  */
 import { createClient, OAuthStrategy } from "@wix/sdk";
 import { products, collections } from "@wix/stores";
 import { cookies } from "next/headers";
+import { REFRESH_TOKEN_COOKIE } from "@/lib/authCookies";
 
 /**
  * Builds a Wix client authenticated with the visitor refresh token from cookies.
@@ -20,7 +22,7 @@ export const wixClientServer = async () => {
   let refreshToken;
   try {
     const cookieStore = await cookies();
-    refreshToken = JSON.parse(cookieStore.get("refreshToken")?.value || "{}");
+    refreshToken = JSON.parse(cookieStore.get(REFRESH_TOKEN_COOKIE)?.value || "{}");
   } catch (e) {
     console.error("Failed to fetch products", e);
   }
