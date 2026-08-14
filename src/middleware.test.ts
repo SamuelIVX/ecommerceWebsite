@@ -4,20 +4,22 @@
  * runs against a fake request; asserts the minted visitor token is written
  * under the singular `refreshToken` name the clients read.
  */
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { NextRequest } from "next/server";
 import { REFRESH_TOKEN_COOKIE } from "@/lib/authCookies";
 import { middleware } from "@/middleware";
 
 const visitorToken = { value: "visitor-refresh-token", role: "VISITOR" };
 
+const generateVisitorTokens = vi.fn(async () => ({
+    accessToken: { value: "access", expiresAt: 3600 },
+    refreshToken: visitorToken,
+}));
+
 vi.mock("@wix/sdk", () => ({
   createClient: vi.fn(() => ({
     auth: {
-      generateVisitorTokens: vi.fn(async () => ({
-        accessToken: { value: "access", expiresAt: 3600 },
-        refreshToken: visitorToken,
-      })),
+      generateVisitorTokens,
     },
   })),
   OAuthStrategy: vi.fn(() => ({})),
@@ -46,11 +48,16 @@ vi.mock("next/server", () => ({
 }));
 
 describe("middleware visitor-token handoff", () => {
+  beforeEach(() => {
+    generateVisitorTokens.mockClear();
+  });
+
   it("mints visitor tokens and sets the cookie under the singular refreshToken name when absent (R3)", async () => {
     const request = makeRequest(false);
     const res = (await middleware(request)) as unknown as { cookies: SetCookieSpy };
 
     expect(request.cookies.get).toHaveBeenCalledWith(REFRESH_TOKEN_COOKIE);
+    expect(generateVisitorTokens).toHaveBeenCalledTimes(1);
     expect(res.cookies.set).toHaveBeenCalledTimes(1);
     const [name, value] = res.cookies.set.mock.calls[0];
     expect(name).toBe("refreshToken");
@@ -62,6 +69,7 @@ describe("middleware visitor-token handoff", () => {
     const res = (await middleware(request)) as unknown as { cookies: SetCookieSpy };
 
     expect(request.cookies.get).toHaveBeenCalledWith(REFRESH_TOKEN_COOKIE);
+    expect(generateVisitorTokens).not.toHaveBeenCalled();
     expect(res.cookies.set).not.toHaveBeenCalled();
   });
 });
