@@ -1,0 +1,25 @@
+---
+name: Stale PR/Issue Management
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  stale:
+    name: Mark and close stale items
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@5bef64f19d7facfb25b37b414482c7164d639639
+        with:
+          days-before-stale: 30
+          days-before-close: 14
+          stale-issue-message: "This issue has had no activity for 30 days and will be closed in 14 days if there's no further activity."
+          stale-pr-message: "This PR has had no activity for 30 days and will be closed in 14 days if there's no further activity."
+          exempt-issue-labels: "keep-open,security"
+          exempt-pr-labels: "keep-open,security"

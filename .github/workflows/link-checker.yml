@@ -1,0 +1,29 @@
+---
+name: Link Checker
+
+on:
+  pull_request: {}
+  schedule:
+    - cron: "0 18 * * 1"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  lychee:
+    name: Check for broken links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+      - name: Link Checker
+        id: lychee
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8
+        with:
+          args: --verbose --no-progress './**/*.md' './**/*.html'
+          fail: false
+
+      - name: Fail if broken links found
+        if: steps.lychee.outputs.exit_code != 0
+        run: exit 1
