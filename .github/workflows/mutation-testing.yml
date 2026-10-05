@@ -36,7 +36,7 @@ jobs:
       - name: Run Stryker on Changed Files
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-            npx stryker run --since="origin/${{ github.base_ref }}"
+            npx stryker run --since "origin/${{ github.base_ref }}"
           else
             npx stryker run
           fi
