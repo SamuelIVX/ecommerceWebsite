@@ -34,6 +34,7 @@ jobs:
         run: npm ci
 
       - name: Run Stryker
+        if: ${{ !startsWith(github.head_ref, 'renovate/') }}
         run: npx stryker run
 
       - name: Upload Mutation Report
