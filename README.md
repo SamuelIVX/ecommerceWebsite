@@ -1,41 +1,34 @@
 # Ecommerce Website
 
-**Full-Stack Ecommerce Platform**
+A Next.js 16 storefront application featuring Zustand-based cart management, robust filtering capabilities, and a Wix CMS backend. 
 
-> "Production-ready shopping experience."
-
-A modern ecommerce web application built with Next.js and Wix, featuring user authentication, cart management, product search, and a complete checkout flow.
+This repository enforces strict CI gates (Build/Lint) on all pull requests and uses Renovate for automated dependency management.
 
 ## Features
 
-- 🔐 **User Authentication** - OAuth integration with secure token refresh
-- 🛒 **Shopping Cart** - Full cart management with persistent state
-- 🔍 **Product Search** - Real-time search with filtering and pagination
-- 💳 **Checkout Flow** - Complete checkout process ready for payment integration
-- 📱 **Responsive Design** - Mobile-first design with Tailwind CSS
-- ⚡ **Optimized Performance** - Server-side rendering and static generation
+- OAuth user authentication with secure token refresh
+- Client-side cart management via Zustand with persistent state
+- Real-time product search, filtering, and pagination
+- Server-side rendering and static generation optimizations
+- Mobile-first responsive UI leveraging Tailwind CSS
+
+*Note: This repository serves as a storefront and cart management demonstration; a final checkout/payment route is intentionally not implemented.*
 
 ## Tech Stack
 
 ### Frontend
-- **Next.js 15** - React framework with App Router
-- **React 19** - UI library
-- **TypeScript** - Type-safe development
-- **Tailwind CSS** - Styling
+- **Next.js 16** / **React 19**
+- **TypeScript**
+- **Tailwind CSS**
+- **Zustand** - Global state management
 
-### Ecommerce & State Management
-- **Wix SDK** - Ecommerce backend and product management
-- **Zustand** - Global state management for cart
-
-### Authentication
-- **OAuth** - User authentication
-- **Cookie-based Sessions** - Secure session management with auto-refresh
+### Backend / Data
+- **Wix CMS / SDK** - Product inventory and user authentication
 
 ## Prerequisites
 
-- Node.js v18 or higher
+- Node.js v20+
 - npm or yarn
-- Wix Developer Account
 
 ## Getting Started
 
@@ -52,14 +45,12 @@ cd ecommerceWebsite
 npm install
 ```
 
-### 3. Configure Environment Variables
+### 3. Environment Variables
 
-Create a `.env` file in the root directory:
+Create a `.env.local` file in the root directory. You will need a Wix Client ID for the SDK to authenticate requests:
 
 ```env
-NEXT_PUBLIC_WIX_CLIENT_ID=your_client_id_here
-FEATURED_PRODUCTS_CATEGORY_ID=your_featured_products_id_here
-NEXT_PUBLIC_WIX_APP_ID=your_public_wix_app_id_here
+NEXT_PUBLIC_WIX_CLIENT_ID=your_wix_client_id_here
 ```
 
 ### 4. Run the Development Server
@@ -74,13 +65,11 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ```bash
 src/
-├── app/              # Next.js pages and routes
-├── components/       # React components
-│   ├── CartModel.tsx
-│   ├── CategoryList.tsx
-│   ├── ProductList.tsx
-│   └── ...
-├── context/          # React context providers
-├── hooks/            # Custom React hooks
-└── lib/              # Utility functions and clients
+├── app/              # Next.js App Router pages
+├── components/       # Shared UI and layout components
+├── hooks/            # Custom React hooks (e.g., useCart)
+├── lib/              # Wix SDK configuration and utilities
+├── store/            # Zustand store definitions
+├── types/            # TypeScript interfaces
+└── styles/           # Global CSS and Tailwind directives
 ```
