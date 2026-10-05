@@ -39,7 +39,7 @@ const ProductList = async ({
   let productQuery = wixClient.products
     .queryProducts()
     .startsWith("name", params?.name || "")
-    .eq("collectionIds", categoryId)
+    .eq("collectionIds" as any, categoryId)
     .hasSome(
       "productType",
       params?.type ? [params.type] : ["physical", "digital"]
