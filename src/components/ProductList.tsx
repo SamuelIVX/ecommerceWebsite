@@ -41,7 +41,7 @@ const ProductList = async ({
     .startsWith("name", params?.name || "")
     .eq("collectionIds" as any, categoryId)
     .hasSome(
-      "productType",
+      "productType" as any,
       params?.type ? [params.type] : ["physical", "digital"]
     )
     .gt("priceData.price", params?.min || 0)
